@@ -16,24 +16,59 @@ import { GUIDES_DATA } from './data/guidesData';
 import { PDFTool } from './types/pdf';
 import { X } from 'lucide-react';
 
+const getInitialPath = (): string => {
+  if (typeof window === 'undefined') return '/';
+
+  // 1. Check URL query params for fallback redirects (e.g. ?p=/merge-pdf)
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramPath = urlParams.get('p') || urlParams.get('path');
+    if (paramPath) {
+      const decoded = decodeURIComponent(paramPath);
+      const cleanPath = decoded.startsWith('/') ? decoded : '/' + decoded;
+      // Clean up the query parameter in the browser address bar
+      window.history.replaceState({}, '', cleanPath);
+      return cleanPath;
+    }
+  } catch {
+    // Ignore query parse error
+  }
+
+  // 2. Check URL Hash (e.g. #/merge-pdf or #merge-pdf)
+  if (window.location.hash) {
+    const rawHash = window.location.hash.replace(/^#\/?/, '');
+    if (rawHash) {
+      return '/' + rawHash;
+    }
+  }
+
+  // 3. Fallback to standard pathname
+  return window.location.pathname || '/';
+};
+
 export function AppContent() {
-  const [currentPath, setCurrentPath] = useState<string>(window.location.pathname || '/');
+  const [currentPath, setCurrentPath] = useState<string>(getInitialPath());
   const [activeTool, setActiveTool] = useState<PDFTool | null>(null);
   const [activeGuideSlug, setActiveGuideSlug] = useState<string | null>(null);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   // Synchronize router paths
   useEffect(() => {
-    const handlePopState = () => {
-      const path = window.location.pathname;
+    const handleLocationChange = () => {
+      const path = getInitialPath();
       setCurrentPath(path);
       resolvePath(path);
     };
 
-    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+
     resolvePath(currentPath);
 
-    return () => window.removeEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
   }, []);
 
   const resolvePath = (path: string) => {

@@ -40,9 +40,10 @@ export function updateSEOHead({
     element.setAttribute('href', hrefVal);
   };
 
-  // Set Description & Canonical
+  // Set Description, Canonical & Favicon Icon
   setMeta('name', 'description', description);
   setLink('canonical', canonicalUrl);
+  setLink('icon', '/favicon.svg');
 
   // Open Graph
   setMeta('property', 'og:title', title);

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="50%" stop-color="#4F46E5" />
+      <stop offset="100%" stop-color="#DC2626" />
+    </linearGradient>
+    <linearGradient id="docGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F1F5F9" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Rounded Background Card -->
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#bgGrad)" />
+
+  <!-- Document Sheet -->
+  <g filter="url(#shadow)">
+    <path d="M144 112 H304 L368 176 V400 C368 413.255 357.255 424 344 424 H144 C130.745 424 120 413.255 120 400 V136 C120 122.745 130.745 112 144 112 Z" fill="url(#docGrad)" />
+    <!-- Folded Corner -->
+    <path d="M304 112 V168 C304 172.418 307.582 176 312 176 H368 L304 112 Z" fill="#CBD5E1" />
+  </g>
+
+  <!-- Red Accent PDF Badge -->
+  <rect x="160" y="240" width="192" height="52" rx="12" fill="#EF4444" />
+  <text x="256" y="277" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="28" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">PDF</text>
+
+  <!-- SRA Brand Stamp -->
+  <text x="256" y="360" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="36" fill="#1E293B" text-anchor="middle" letter-spacing="4">SRA</text>
+</svg>

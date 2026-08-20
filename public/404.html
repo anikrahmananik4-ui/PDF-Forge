@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRA PDF — Free Online PDF Tools</title>
+    <script>
+      (function () {
+        var path = window.location.pathname;
+        var search = window.location.search;
+        var hash = window.location.hash;
+        if (path && path !== '/' && path !== '/index.html') {
+          var redirectUrl = '/?p=' + encodeURIComponent(path + search + hash);
+          window.location.replace(redirectUrl);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
