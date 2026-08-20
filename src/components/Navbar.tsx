@@ -3,6 +3,7 @@ import { FileText, Sun, Moon, Menu, X, Search, ChevronDown, ShieldCheck, LayoutD
 import { useTheme } from '../context/ThemeContext';
 import { TOOL_CATEGORIES, PDF_TOOLS } from '../data/toolsData';
 import { PDFTool } from '../types/pdf';
+import { Logo } from './Logo';
 
 interface NavbarProps {
   currentPath: string;
@@ -28,19 +29,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, onOpenS
           {/* Logo */}
           <div
             onClick={() => handleLinkClick('/')}
-            className="flex items-center space-x-2.5 cursor-pointer group"
+            className="cursor-pointer"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
-              <FileText className="w-5 h-5" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-1">
-                PDF<span className="text-blue-600 dark:text-blue-400">Forge</span>
-              </span>
-              <span className="text-[10px] font-medium text-slate-400 dark:text-slate-500 -mt-1 tracking-wider uppercase">
-                Online Suite
-              </span>
-            </div>
+            <Logo />
           </div>
 
           {/* Desktop Navigation */}
@@ -93,6 +84,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, onOpenS
                 </div>
               );
             })}
+
+            <button
+              onClick={() => handleLinkClick('/guides')}
+              className={`px-3 py-2 rounded-xl text-sm font-semibold transition-colors ${
+                currentPath.startsWith('/guides')
+                  ? 'bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400'
+                  : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+              }`}
+            >
+              Guides
+            </button>
 
             <button
               onClick={() => handleLinkClick('/pricing')}

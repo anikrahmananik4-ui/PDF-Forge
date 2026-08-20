@@ -87,6 +87,27 @@ setInterval(() => {
 let totalJobsProcessed = 42;
 let totalBytesSaved = 1024 * 1024 * 350; // 350MB
 
+// Dynamic Sitemap and Robots.txt routes
+app.get('/sitemap.xml', (req: Request, res: Response) => {
+  const sitemapPath = path.join(process.cwd(), 'public', 'sitemap.xml');
+  if (fs.existsSync(sitemapPath)) {
+    res.header('Content-Type', 'application/xml');
+    res.sendFile(sitemapPath);
+  } else {
+    res.status(404).send('Sitemap not found');
+  }
+});
+
+app.get('/robots.txt', (req: Request, res: Response) => {
+  const robotsPath = path.join(process.cwd(), 'public', 'robots.txt');
+  if (fs.existsSync(robotsPath)) {
+    res.header('Content-Type', 'text/plain');
+    res.sendFile(robotsPath);
+  } else {
+    res.status(404).send('Robots.txt not found');
+  }
+});
+
 // API ROUTES
 
 // Healthcheck
@@ -159,7 +180,7 @@ app.get('/api/admin/settings', (req: Request, res: Response) => {
   res.json({
     success: true,
     settings: {
-      siteName: 'PDFForge',
+      siteName: 'SRA PDF',
       maxFileSizeMb: Math.round(MAX_FILE_SIZE / (1024 * 1024)),
       tempFileTtlHours: Math.round(TEMP_FILE_TTL / 3600),
       maintenanceMode: false,
@@ -213,7 +234,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`PDFForge full-stack server running on http://0.0.0.0:${PORT}`);
+    console.log(`SRA PDF full-stack server running on http://0.0.0.0:${PORT}`);
   });
 }
 

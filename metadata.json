@@ -1,6 +1,6 @@
 {
-  "name": "PDFForge",
-  "description": "Online PDF tools suite to merge, split, compress, convert, edit, and manage PDF files",
+  "name": "SRA PDF",
+  "description": "SRA PDF — Free online PDF tools suite to merge, split, compress, convert, edit, and manage PDF files",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -224,6 +224,7 @@ export const PDFEditorCanvas: React.FC<PDFEditorCanvasProps> = ({ file, onSave }
                     color: item.color,
                     fontSize: `${item.fontSize}px`,
                     fontWeight: 'bold',
+                    fontFamily: '"Noto Sans Bengali", "SolaimanLipi", sans-serif',
                     lineHeight: 1
                   }}
                 >

@@ -1,12 +1,17 @@
 {
-  "name": "PDFForge – Online PDF Tools",
-  "short_name": "PDFForge",
-  "description": "Every PDF Tool You Need. In One Place.",
+  "name": "SRA PDF – Online PDF Tools",
+  "short_name": "SRA PDF",
+  "description": "SRA PDF — Every PDF Tool You Need. In One Place.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#2563eb",
   "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    },
     {
       "src": "/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",

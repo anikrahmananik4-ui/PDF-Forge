@@ -19,6 +19,11 @@ export interface PDFTool {
   badge?: string;
   instructions: string[];
   faqs: { question: string; answer: string }[];
+  relatedToolIds?: string[];
+  seoH1?: string;
+  seoTitle?: string;
+  seoMetaDescription?: string;
+  keywords?: string[];
 }
 
 export interface UploadedFile {

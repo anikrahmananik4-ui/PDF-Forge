@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /temp_uploads/
+
+Sitemap: https://ais-dev-xjbfiikcx4utwuofvac2jx-107699198401.asia-southeast1.run.app/sitemap.xml

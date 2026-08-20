@@ -4,18 +4,22 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { SearchBar } from './components/SearchBar';
 import { HomePage } from './pages/HomePage';
-import { AllToolsPage } from './pages/AllToolsPage';
+import { ToolsDirectoryPage } from './pages/ToolsDirectoryPage';
 import { ToolRunnerPage } from './pages/ToolRunnerPage';
+import { GuidesPage } from './pages/GuidesPage';
+import { GuideDetailPage } from './pages/GuideDetailPage';
 import { PricingPage } from './pages/PricingPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { AboutPage, ContactPage, PrivacyPage, TermsPage } from './pages/StaticPages';
 import { PDF_TOOLS } from './data/toolsData';
+import { GUIDES_DATA } from './data/guidesData';
 import { PDFTool } from './types/pdf';
 import { X } from 'lucide-react';
 
 export function AppContent() {
   const [currentPath, setCurrentPath] = useState<string>(window.location.pathname || '/');
   const [activeTool, setActiveTool] = useState<PDFTool | null>(null);
+  const [activeGuideSlug, setActiveGuideSlug] = useState<string | null>(null);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   // Synchronize router paths
@@ -23,30 +27,47 @@ export function AppContent() {
     const handlePopState = () => {
       const path = window.location.pathname;
       setCurrentPath(path);
-      resolveToolFromPath(path);
+      resolvePath(path);
     };
 
     window.addEventListener('popstate', handlePopState);
-    resolveToolFromPath(currentPath);
+    resolvePath(currentPath);
 
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  const resolveToolFromPath = (path: string) => {
-    if (path.startsWith('/tools/')) {
-      const match = PDF_TOOLS.find((t) => t.path === path);
-      if (match) {
-        setActiveTool(match);
-      }
+  const resolvePath = (path: string) => {
+    // 1. Tool Matching (support both clean /merge-pdf AND legacy /tools/merge-pdf)
+    let cleanPath = path;
+    if (cleanPath.startsWith('/tools/')) {
+      cleanPath = '/' + cleanPath.replace('/tools/', '');
+    }
+
+    const matchedTool = PDF_TOOLS.find(
+      (t) => t.path === path || t.path === cleanPath || t.id === cleanPath.replace('/', '')
+    );
+
+    if (matchedTool) {
+      setActiveTool(matchedTool);
+      setActiveGuideSlug(null);
+      return;
+    }
+
+    setActiveTool(null);
+
+    // 2. Guides Matching
+    if (path.startsWith('/guides/')) {
+      const slug = path.replace('/guides/', '');
+      setActiveGuideSlug(slug);
     } else {
-      setActiveTool(null);
+      setActiveGuideSlug(null);
     }
   };
 
   const navigateTo = (path: string) => {
     window.history.pushState({}, '', path);
     setCurrentPath(path);
-    resolveToolFromPath(path);
+    resolvePath(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -54,6 +75,11 @@ export function AppContent() {
     navigateTo(tool.path);
     setSearchModalOpen(false);
   };
+
+  // Active guide article lookup
+  const activeGuideArticle = activeGuideSlug
+    ? GUIDES_DATA.find((g) => g.slug === activeGuideSlug)
+    : null;
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors">
@@ -70,10 +96,17 @@ export function AppContent() {
             onSelectTool={selectTool}
             onGoHome={() => navigateTo('/')}
           />
+        ) : activeGuideArticle ? (
+          <GuideDetailPage
+            article={activeGuideArticle}
+            onNavigate={navigateTo}
+          />
+        ) : currentPath === '/guides' ? (
+          <GuidesPage onNavigate={navigateTo} />
         ) : currentPath === '/tools' ? (
-          <AllToolsPage onSelectTool={selectTool} />
+          <ToolsDirectoryPage onSelectTool={selectTool} />
         ) : currentPath === '/pricing' ? (
-          <PricingPage />
+          <PricingPage onNavigate={navigateTo} onSelectFree={() => navigateTo('/')} />
         ) : currentPath === '/dashboard' ? (
           <DashboardPage />
         ) : currentPath === '/about' ? (

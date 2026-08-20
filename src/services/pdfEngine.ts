@@ -6,6 +6,7 @@ import { Document, Paragraph, TextRun, Packer } from 'docx';
 import mammoth from 'mammoth';
 import * as XLSX from 'xlsx';
 import { jsPDF } from 'jspdf';
+import { encryptPDF } from '@pdfsmaller/pdf-encrypt';
 
 // Configure pdfjs worker URL and cMaps for complex scripts (Bengali, Hindi, Arabic, etc.)
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
@@ -366,28 +367,65 @@ export async function watermarkPDF(
   const rotAngle = options.rotation ?? 45;
 
   if (options.type === 'text' && options.text) {
-    const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-    const fontSize = options.fontSize ?? 48;
     const colorHex = options.color || '#3b82f6';
+    const opacity = options.opacity ?? 0.3;
+    const rotAngle = options.rotation ?? 45;
+    const fontSize = options.fontSize ?? 48;
 
-    const r = parseInt(colorHex.slice(1, 3), 16) / 255;
-    const g = parseInt(colorHex.slice(3, 5), 16) / 255;
-    const b = parseInt(colorHex.slice(5, 7), 16) / 255;
+    const containsNonLatin = /[^\u0000-\u00FF]/.test(options.text);
 
-    for (const page of pages) {
-      const { width, height } = page.getSize();
-      const textWidth = font.widthOfTextAtSize(options.text, fontSize);
-      const textHeight = font.heightAtSize(fontSize);
+    if (containsNonLatin) {
+      // Render via canvas for 100% accurate Bengali / Unicode font support
+      const canvas = document.createElement('canvas');
+      canvas.width = 1200;
+      canvas.height = 400;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.font = `bold ${fontSize * 2.5}px "Noto Sans Bengali", "Kalpurush", "SolaimanLipi", sans-serif`;
+        ctx.fillStyle = colorHex;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(options.text, 600, 200);
 
-      page.drawText(options.text, {
-        x: (width - textWidth) / 2,
-        y: (height - textHeight) / 2,
-        size: fontSize,
-        font,
-        color: rgb(r, g, b),
-        opacity,
-        rotate: degrees(rotAngle)
-      });
+        const dataUrl = canvas.toDataURL('image/png');
+        const pngImage = await pdfDoc.embedPng(dataUrl);
+
+        for (const page of pages) {
+          const { width, height } = page.getSize();
+          const imgW = width * 0.7;
+          const imgH = (pngImage.height / pngImage.width) * imgW;
+
+          page.drawImage(pngImage, {
+            x: (width - imgW) / 2,
+            y: (height - imgH) / 2,
+            width: imgW,
+            height: imgH,
+            opacity,
+            rotate: degrees(rotAngle)
+          });
+        }
+      }
+    } else {
+      const font = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+      const r = parseInt(colorHex.slice(1, 3), 16) / 255;
+      const g = parseInt(colorHex.slice(3, 5), 16) / 255;
+      const b = parseInt(colorHex.slice(5, 7), 16) / 255;
+
+      for (const page of pages) {
+        const { width, height } = page.getSize();
+        const textWidth = font.widthOfTextAtSize(options.text, fontSize);
+        const textHeight = font.heightAtSize(fontSize);
+
+        page.drawText(options.text, {
+          x: (width - textWidth) / 2,
+          y: (height - textHeight) / 2,
+          size: fontSize,
+          font,
+          color: rgb(r, g, b),
+          opacity,
+          rotate: degrees(rotAngle)
+        });
+      }
     }
   } else if (options.type === 'image' && options.imageFile) {
     const imgBuffer = await options.imageFile.arrayBuffer();
@@ -479,32 +517,83 @@ export async function addPageNumbers(
 
 // 10. PROTECT PDF
 export async function protectPDF(file: File, userPassword: string): Promise<Uint8Array> {
+  if (!userPassword || !userPassword.trim()) {
+    throw new Error('Please enter a password to protect the PDF.');
+  }
+
   const arrayBuffer = await file.arrayBuffer();
-  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-  
-  (pdfDoc as any).encrypt({
-    userPassword: userPassword,
-    ownerPassword: userPassword,
-    permissions: {
-      printing: 'highResolution',
-      modifying: false,
-      copying: true,
-      annotating: false
-    }
+  const pdfBytes = new Uint8Array(arrayBuffer);
+
+  // Encrypt with AES-256 standard
+  const encryptedBytes = await encryptPDF(pdfBytes, userPassword.trim(), {
+    algorithm: 'AES-256',
+    ownerPassword: userPassword.trim()
   });
 
-  return await pdfDoc.save();
+  return encryptedBytes;
 }
 
 // 11. UNLOCK PDF
-export async function unlockPDF(file: File, password: string): Promise<Uint8Array> {
+export async function unlockPDF(file: File, password?: string): Promise<Uint8Array> {
   const arrayBuffer = await file.arrayBuffer();
+  const pass = password ? password.trim() : '';
+
+  let pdf;
   try {
-    const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
-    return await pdfDoc.save();
-  } catch {
-    throw new Error('Incorrect password or unreadable encrypted PDF file.');
+    const loadingTask = pdfjsLib.getDocument({
+      data: new Uint8Array(arrayBuffer),
+      password: pass,
+      cMapUrl: CMAP_URL,
+      cMapPacked: true,
+      standardFontDataUrl: STANDARD_FONT_DATA_URL
+    });
+    pdf = await loadingTask.promise;
+  } catch (err: any) {
+    if (err?.name === 'PasswordException' || err?.code === 1 || err?.code === 2) {
+      if (!pass) {
+        throw new Error('This PDF document is password-protected. Please enter the password in the box above to unlock it.');
+      } else {
+        throw new Error('Incorrect password provided. Please verify the password and try again.');
+      }
+    }
+    throw new Error('Failed to decrypt or read the PDF file. Please check if the file or password is valid.');
   }
+
+  // Render each page into a clean unlocked PDF
+  const doc = new jsPDF({ unit: 'pt', compress: true });
+
+  for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+    const page = await pdf.getPage(pageNum);
+    const viewport = page.getViewport({ scale: 2.0 });
+
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) continue;
+
+    await page.render({
+      canvasContext: ctx,
+      viewport: viewport
+    }).promise;
+
+    const imgData = canvas.toDataURL('image/jpeg', 0.92);
+
+    const pageWidthPt = viewport.width / 2.0;
+    const pageHeightPt = viewport.height / 2.0;
+
+    if (pageNum > 1) {
+      doc.addPage([pageWidthPt, pageHeightPt]);
+    } else {
+      doc.deletePage(1);
+      doc.addPage([pageWidthPt, pageHeightPt]);
+    }
+
+    doc.addImage(imgData, 'JPEG', 0, 0, pageWidthPt, pageHeightPt);
+  }
+
+  return new Uint8Array(doc.output('arraybuffer'));
 }
 
 // 12. PDF METADATA

@@ -6,13 +6,13 @@ export const AboutPage: React.FC = () => (
     {/* Header */}
     <div className="space-y-4 text-center max-w-3xl mx-auto">
       <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider">
-        <Globe className="w-3.5 h-3.5" /> About PDFForge
+        <Globe className="w-3.5 h-3.5" /> About SRA PDF
       </div>
       <h1 className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
         Advanced & Secure PDF Platform
       </h1>
       <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-        Welcome to PDFForge, an advanced and secure platform designed to make your daily PDF management effortless, fast, and professional.
+        Welcome to SRA PDF, an advanced and secure platform designed to make your daily PDF management effortless, fast, and professional.
       </p>
     </div>
 
@@ -26,10 +26,10 @@ export const AboutPage: React.FC = () => (
       </p>
     </div>
 
-    {/* Why Choose PDFForge */}
+    {/* Why Choose SRA PDF */}
     <div className="space-y-6">
       <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white text-center">
-        Why Choose PDFForge?
+        Why Choose SRA PDF?
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-3 shadow-sm">
@@ -77,7 +77,7 @@ export const AboutPage: React.FC = () => (
       </div>
 
       <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-        PDFForge is a modern digital initiative crafted under <strong>SRA Digital Labs</strong> and <strong>Anik-Matrix Innovations</strong>. Founded by <strong>Sahadatur Rahman Anik</strong>—a Full-Stack Developer and SEO Expert—the platform represents a commitment to building innovative, reliable, and high-quality digital solutions driven by technology and creativity.
+        SRA PDF is a modern digital initiative crafted under <strong>SRA Digital Labs</strong> and <strong>Anik-Matrix Innovations</strong>. Founded by <strong>Sahadatur Rahman Anik</strong>—a Full-Stack Developer and SEO Expert—the platform represents a commitment to building innovative, reliable, and high-quality digital solutions driven by technology and creativity.
       </p>
 
       <div className="pt-4 border-t border-slate-200 dark:border-slate-700/60 flex flex-wrap items-center gap-6 text-xs text-slate-500 dark:text-slate-400">
@@ -109,7 +109,7 @@ export const ContactPage: React.FC = () => {
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">Contact Us</h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-          Have questions, feedback, or need support with PDFForge? Get in touch with us:
+          Have questions, feedback, or need support with SRA PDF? Get in touch with us:
         </p>
       </div>
 
@@ -129,7 +129,7 @@ export const ContactPage: React.FC = () => {
           <div>
             <span className="text-xs font-bold text-slate-400 block uppercase tracking-wider">Platform & Ownership</span>
             <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">
-              PDFForge (A project by SRA Digital Labs & Anik-Matrix Innovations)
+              SRA PDF (A project by SRA Digital Labs & Anik-Matrix Innovations)
             </span>
           </div>
         </div>
@@ -194,7 +194,7 @@ export const ContactPage: React.FC = () => {
 export const PrivacyPage: React.FC = () => (
   <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8 text-slate-700 dark:text-slate-300">
     <div className="border-b border-slate-200 dark:border-slate-800 pb-6 space-y-2">
-      <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">Privacy Policy for PDFForge</h1>
+      <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">Privacy Policy for SRA PDF</h1>
       <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
         <span>Effective Date: August 20, 2026</span>
         <span>•</span>
@@ -203,7 +203,7 @@ export const PrivacyPage: React.FC = () => (
     </div>
 
     <p className="text-xs sm:text-sm leading-relaxed">
-      At PDFForge (a product powered by <strong>SRA Digital Labs</strong> and <strong>Anik-Matrix Innovations</strong>), accessible via our web application, one of our main priorities is the privacy of our visitors and users. This Privacy Policy document outlines the types of information that is collected and recorded by PDFForge and how we use, process, and protect it.
+      At SRA PDF (a product powered by <strong>SRA Digital Labs</strong> and <strong>Anik-Matrix Innovations</strong>), accessible via our web application, one of our main priorities is the privacy of our visitors and users. This Privacy Policy document outlines the types of information that is collected and recorded by SRA PDF and how we use, process, and protect it.
     </p>
 
     <div className="space-y-6 text-xs sm:text-sm leading-relaxed">
@@ -212,7 +212,7 @@ export const PrivacyPage: React.FC = () => (
         <p>We only collect minimal data necessary to provide you with a fast, seamless, and secure PDF management experience.</p>
         <ul className="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400 pl-2">
           <li><strong>Uploaded Files & Documents:</strong> When you use our PDF tools (such as merging, splitting, compressing, or converting files), your uploaded files are temporarily processed on our secure servers.</li>
-          <li><strong>Log & Usage Data:</strong> Like most web applications, PDFForge collects non-personally identifiable information automatically. This includes browser type, operating system, referring URLs, device type, date/time stamps, and basic usage statistics.</li>
+          <li><strong>Log & Usage Data:</strong> Like most web applications, SRA PDF collects non-personally identifiable information automatically. This includes browser type, operating system, referring URLs, device type, date/time stamps, and basic usage statistics.</li>
           <li><strong>Cookies & Technical Data:</strong> We may use essential cookies and local storage to save your session preferences and ensure the smooth execution of file processing tasks.</li>
         </ul>
       </section>
@@ -230,7 +230,7 @@ export const PrivacyPage: React.FC = () => (
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">3. File Processing & Automatic Deletion</h3>
-        <p>Your document security and data privacy are core principles of PDFForge:</p>
+        <p>Your document security and data privacy are core principles of SRA PDF:</p>
         <ul className="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400 pl-2">
           <li><strong>No Permanent File Storage:</strong> Your uploaded files are never permanently stored, indexed, or archived on our servers.</li>
           <li><strong>Automatic Deletion:</strong> All uploaded files, temporary processing copies, and output files are automatically and permanently deleted from our temporary storage (<code className="bg-slate-100 dark:bg-slate-900 px-1 py-0.5 rounded text-[11px]">TEMP_FILE_TTL</code>) shortly after processing.</li>
@@ -240,7 +240,7 @@ export const PrivacyPage: React.FC = () => (
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">4. Data Sharing & Third-Party Services</h3>
-        <p>PDFForge does not sell, trade, rent, or lease your personal information or uploaded file data to third parties.</p>
+        <p>SRA PDF does not sell, trade, rent, or lease your personal information or uploaded file data to third parties.</p>
         <ul className="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400 pl-2">
           <li><strong>Infrastructure & Hosting:</strong> We utilize secure, industry-standard hosting providers and serverless infrastructures (such as Supabase and cloud hosting services) strictly to run our backend code and process data securely.</li>
           <li><strong>Legal Requirements:</strong> We may disclose non-file usage logs only if required to do so by law or in response to valid requests by public authorities.</li>
@@ -266,7 +266,7 @@ export const PrivacyPage: React.FC = () => (
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">7. Children's Information</h3>
-        <p>PDFForge does not knowingly collect any personally identifiable information from children under the age of 13. If you believe your child provided personal information on our website, please contact us immediately, and we will promptly remove such information from our records.</p>
+        <p>SRA PDF does not knowingly collect any personally identifiable information from children under the age of 13. If you believe your child provided personal information on our website, please contact us immediately, and we will promptly remove such information from our records.</p>
       </section>
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
@@ -290,7 +290,7 @@ export const PrivacyPage: React.FC = () => (
 export const TermsPage: React.FC = () => (
   <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8 text-slate-700 dark:text-slate-300">
     <div className="border-b border-slate-200 dark:border-slate-800 pb-6 space-y-2">
-      <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">Terms and Conditions for PDFForge</h1>
+      <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">Terms and Conditions for SRA PDF</h1>
       <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
         <span>Effective Date: August 20, 2026</span>
         <span>•</span>
@@ -299,25 +299,25 @@ export const TermsPage: React.FC = () => (
     </div>
 
     <p className="text-xs sm:text-sm leading-relaxed">
-      Welcome to PDFForge (a product powered by <strong>SRA Digital Labs</strong> and <strong>Anik-Matrix Innovations</strong>). By accessing or using our web application and services, you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to all of these Terms, please do not use our service.
+      Welcome to SRA PDF (a product powered by <strong>SRA Digital Labs</strong> and <strong>Anik-Matrix Innovations</strong>). By accessing or using our web application and services, you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to all of these Terms, please do not use our service.
     </p>
 
     <div className="space-y-6 text-xs sm:text-sm leading-relaxed">
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">1. Acceptance of Terms</h3>
-        <p>By using PDFForge, you confirm that you are at least 13 years old (or the age of legal majority in your jurisdiction) and possess the legal capacity to enter into a binding agreement.</p>
+        <p>By using SRA PDF, you confirm that you are at least 13 years old (or the age of legal majority in your jurisdiction) and possess the legal capacity to enter into a binding agreement.</p>
       </section>
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">2. Description of Service</h3>
-        <p>PDFForge provides online file management tools, including but not limited to PDF editing, merging, splitting, compressing, and converting ("Services"). We reserve the right to modify, suspend, or discontinue any aspect of the service at any time without prior notice.</p>
+        <p>SRA PDF provides online file management tools, including but not limited to PDF editing, merging, splitting, compressing, and converting ("Services"). We reserve the right to modify, suspend, or discontinue any aspect of the service at any time without prior notice.</p>
       </section>
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">3. Acceptable Use Policy</h3>
-        <p>You agree to use PDFForge strictly for lawful purposes. You are solely responsible for all content, documents, and data you upload, process, or download using our platform.</p>
+        <p>You agree to use SRA PDF strictly for lawful purposes. You are solely responsible for all content, documents, and data you upload, process, or download using our platform.</p>
         <h4 className="font-bold text-xs uppercase tracking-wider text-red-600 dark:text-red-400 pt-2">Prohibited Activities:</h4>
-        <p>You must NOT use PDFForge to:</p>
+        <p>You must NOT use SRA PDF to:</p>
         <ul className="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400 pl-2">
           <li>Upload, process, or distribute files that contain malware, viruses, spyware, or any other malicious code.</li>
           <li>Upload content that violates copyright, trademark, patent, or other intellectual property rights of any third party.</li>
@@ -331,23 +331,23 @@ export const TermsPage: React.FC = () => (
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">4. Intellectual Property Rights</h3>
         <ul className="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400 pl-2">
-          <li><strong>Our Content:</strong> The PDFForge name, logos, UI designs, graphics, branding, code, and overall functionality are the exclusive property of SRA Digital Labs / Anik-Matrix Innovations and founder Sahadatur Rahman Anik.</li>
-          <li><strong>Your Documents:</strong> We claim zero ownership or copyright over the documents you upload, process, or create using PDFForge. Your files remain 100% your property.</li>
+          <li><strong>Our Content:</strong> The SRA PDF name, logos, UI designs, graphics, branding, code, and overall functionality are the exclusive property of SRA Digital Labs / Anik-Matrix Innovations and founder Sahadatur Rahman Anik.</li>
+          <li><strong>Your Documents:</strong> We claim zero ownership or copyright over the documents you upload, process, or create using SRA PDF. Your files remain 100% your property.</li>
         </ul>
       </section>
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">5. File Lifespan & Automated Deletion</h3>
         <ul className="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400 pl-2">
-          <li>Files uploaded to PDFForge are temporarily stored only for as long as necessary to complete the requested processing.</li>
+          <li>Files uploaded to SRA PDF are temporarily stored only for as long as necessary to complete the requested processing.</li>
           <li>All temporary files and outputs are automatically purged according to our server's Time-To-Live (<code className="bg-slate-100 dark:bg-slate-900 px-1 py-0.5 rounded text-[11px]">TEMP_FILE_TTL</code>) configuration.</li>
-          <li>PDFForge is not a cloud backup or permanent storage service. You are responsible for maintaining local copies of your original files. We are not liable for any lost or deleted data resulting from session timeouts or automatic server cleanups.</li>
+          <li>SRA PDF is not a cloud backup or permanent storage service. You are responsible for maintaining local copies of your original files. We are not liable for any lost or deleted data resulting from session timeouts or automatic server cleanups.</li>
         </ul>
       </section>
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">6. Disclaimer of Warranties</h3>
-        <p>PDFForge is provided on an "AS IS" and "AS AVAILABLE" basis without any warranties of any kind, whether express or implied.</p>
+        <p>SRA PDF is provided on an "AS IS" and "AS AVAILABLE" basis without any warranties of any kind, whether express or implied.</p>
         <ul className="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400 pl-2">
           <li>We do not guarantee that file conversions, edits, or processing will be 100% error-free, lossless, or uninterrupted.</li>
           <li>We do not guarantee that our platform will meet your specific business or legal formatting requirements.</li>
@@ -357,7 +357,7 @@ export const TermsPage: React.FC = () => (
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">7. Limitation of Liability</h3>
-        <p>To the maximum extent permitted by applicable law, PDFForge, SRA Digital Labs, Anik-Matrix Innovations, and its owner Sahadatur Rahman Anik shall not be held liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including but not limited to:</p>
+        <p>To the maximum extent permitted by applicable law, SRA PDF, SRA Digital Labs, Anik-Matrix Innovations, and its owner Sahadatur Rahman Anik shall not be held liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including but not limited to:</p>
         <ul className="list-disc list-inside space-y-1 text-slate-600 dark:text-slate-400 pl-2">
           <li>Loss of data, files, or information.</li>
           <li>System downtime, server downtime, or loss of profits.</li>
@@ -372,12 +372,12 @@ export const TermsPage: React.FC = () => (
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">9. Indemnification</h3>
-        <p>You agree to defend, indemnify, and hold harmless PDFForge, SRA Digital Labs, and its creator against any claims, liabilities, damages, losses, or expenses (including legal fees) arising out of your violation of these Terms or misuse of the service.</p>
+        <p>You agree to defend, indemnify, and hold harmless SRA PDF, SRA Digital Labs, and its creator against any claims, liabilities, damages, losses, or expenses (including legal fees) arising out of your violation of these Terms or misuse of the service.</p>
       </section>
 
       <section className="space-y-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
         <h3 className="text-base font-bold text-slate-900 dark:text-white">10. Modifications to Terms</h3>
-        <p>We reserve the right to revise and update these Terms and Conditions at any time. Changes will take effect immediately upon posting to this page. Continued use of PDFForge after updates signifies your acceptance of the revised terms.</p>
+        <p>We reserve the right to revise and update these Terms and Conditions at any time. Changes will take effect immediately upon posting to this page. Continued use of SRA PDF after updates signifies your acceptance of the revised terms.</p>
       </section>
 
       <section className="space-y-2 bg-slate-50 dark:bg-slate-800/80 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
