@@ -143,7 +143,7 @@ export function AppContent() {
         ) : currentPath === '/pricing' ? (
           <PricingPage onNavigate={navigateTo} onSelectFree={() => navigateTo('/')} />
         ) : currentPath === '/dashboard' ? (
-          <DashboardPage />
+          <DashboardPage onNavigate={navigateTo} onSelectTool={selectTool} />
         ) : currentPath === '/about' ? (
           <AboutPage />
         ) : currentPath === '/contact' ? (

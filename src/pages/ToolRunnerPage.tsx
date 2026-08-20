@@ -16,6 +16,7 @@ import { SEOHead } from '../components/SEOHead';
 import { AdSlot } from '../components/AdSlot';
 import { UsageLimitModal } from '../components/UsageLimitModal';
 import { getUsageCount, incrementUsageCount, hasReachedLimit, resetUsageCount, MAX_FREE_USAGE } from '../utils/usageTracker';
+import { addJobToHistory } from '../utils/historyTracker';
 import { ArrowLeft, Sparkles, Sliders, Shield, CheckCircle2, Lock, HelpCircle, Eye, EyeOff, Key, Zap } from 'lucide-react';
 
 interface ToolRunnerPageProps {
@@ -303,6 +304,14 @@ export const ToolRunnerPage: React.FC<ToolRunnerPageProps> = ({
         blob: finalBlob
       });
 
+      addJobToHistory({
+        toolId: tool.id,
+        toolTitle: tool.title,
+        filename: outputFilename,
+        originalSize: Math.max(originalTotalSize, finalBlob.size),
+        outputSize: finalBlob.size
+      });
+
       setProcessingState({ stage: 'completed', progress: 100, message: 'Done!' });
       const newCount = incrementUsageCount();
       setUsageCount(newCount);
@@ -461,6 +470,13 @@ export const ToolRunnerPage: React.FC<ToolRunnerPageProps> = ({
                         processingTimeMs: Date.now() - startTime,
                         blob: new Blob([bytes], { type: 'application/pdf' })
                       });
+                      addJobToHistory({
+                        toolId: tool.id,
+                        toolTitle: tool.title,
+                        filename: `organized_${files[0].name}`,
+                        originalSize: files[0].size,
+                        outputSize: bytes.byteLength
+                      });
                       setProcessingState({ stage: 'completed', progress: 100, message: 'Done!' });
                       const newCount = incrementUsageCount();
                       setUsageCount(newCount);
@@ -489,6 +505,13 @@ export const ToolRunnerPage: React.FC<ToolRunnerPageProps> = ({
                         originalSize: files[0].size,
                         processingTimeMs: Date.now() - startTime,
                         blob: new Blob([bytes], { type: 'application/pdf' })
+                      });
+                      addJobToHistory({
+                        toolId: tool.id,
+                        toolTitle: tool.title,
+                        filename: `edited_${files[0].name}`,
+                        originalSize: files[0].size,
+                        outputSize: bytes.byteLength
                       });
                       setProcessingState({ stage: 'completed', progress: 100, message: 'Done!' });
                       const newCount = incrementUsageCount();
@@ -528,6 +551,13 @@ export const ToolRunnerPage: React.FC<ToolRunnerPageProps> = ({
                             originalSize: files[0].size,
                             processingTimeMs: Date.now() - startTime,
                             blob: new Blob([bytes], { type: 'application/pdf' })
+                          });
+                          addJobToHistory({
+                            toolId: tool.id,
+                            toolTitle: tool.title,
+                            filename: `signed_${files[0].name}`,
+                            originalSize: files[0].size,
+                            outputSize: bytes.byteLength
                           });
                           setProcessingState({ stage: 'completed', progress: 100, message: 'Done!' });
                           const newCount = incrementUsageCount();
