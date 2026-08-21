@@ -42,6 +42,8 @@ export function updateSEOHead({
 
   // Set Description, Canonical & Favicon Icon
   setMeta('name', 'description', description);
+  setMeta('name', 'application-name', 'SRA PDF');
+  setMeta('name', 'apple-mobile-web-app-title', 'SRA PDF');
   setLink('canonical', canonicalUrl);
   setLink('icon', '/favicon.svg');
 
